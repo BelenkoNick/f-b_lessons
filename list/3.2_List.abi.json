@@ -1,0 +1,81 @@
+{
+	"ABI version": 2,
+	"version": "2.1",
+	"header": ["time", "expire"],
+	"functions": [
+		{
+			"name": "constructor",
+			"inputs": [
+			],
+			"outputs": [
+			]
+		},
+		{
+			"name": "addTaskAuto",
+			"inputs": [
+			],
+			"outputs": [
+			]
+		},
+		{
+			"name": "addTaskManually",
+			"inputs": [
+				{"name":"taskName","type":"string"}
+			],
+			"outputs": [
+			]
+		},
+		{
+			"name": "checkNumber",
+			"inputs": [
+			],
+			"outputs": [
+				{"name":"value0","type":"uint8"}
+			]
+		},
+		{
+			"name": "checkList",
+			"inputs": [
+			],
+			"outputs": [
+				{"name":"value0","type":"string[]"}
+			]
+		},
+		{
+			"name": "checkTask",
+			"inputs": [
+				{"name":"index","type":"uint8"}
+			],
+			"outputs": [
+				{"name":"value0","type":"string"}
+			]
+		},
+		{
+			"name": "removeTask",
+			"inputs": [
+				{"name":"index","type":"uint8"}
+			],
+			"outputs": [
+			]
+		},
+		{
+			"name": "FullfillTask",
+			"inputs": [
+				{"name":"index","type":"uint8"}
+			],
+			"outputs": [
+			]
+		}
+	],
+	"data": [
+	],
+	"events": [
+	],
+	"fields": [
+		{"name":"_pubkey","type":"uint256"},
+		{"name":"_timestamp","type":"uint64"},
+		{"name":"_constructorFlag","type":"bool"},
+		{"components":[{"name":"name","type":"string"},{"name":"timestamp","type":"uint32"},{"name":"status","type":"bool"}],"name":"taskList","type":"map(uint8,tuple)"},
+		{"name":"taskCounter","type":"uint8"}
+	]
+}
