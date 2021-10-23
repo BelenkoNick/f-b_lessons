@@ -31,12 +31,25 @@
 			]
 		},
 		{
-			"name": "getPrice",
+			"name": "getTokenOwner",
 			"inputs": [
 				{"name":"tokenId","type":"uint256"}
 			],
 			"outputs": [
 				{"name":"value0","type":"uint256"}
+			]
+		},
+		{
+			"name": "getTokenInfo",
+			"inputs": [
+				{"name":"tokenId","type":"uint256"}
+			],
+			"outputs": [
+				{"name":"tokenName","type":"string"},
+				{"name":"tokenPower","type":"uint256"},
+				{"name":"tokenClan","type":"string"},
+				{"name":"tokenRank","type":"string"},
+				{"name":"tokenPrice","type":"uint256"}
 			]
 		}
 	],
