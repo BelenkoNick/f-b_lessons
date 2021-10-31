@@ -1,0 +1,58 @@
+{
+	"ABI version": 2,
+	"version": "2.1",
+	"header": ["time", "expire"],
+	"functions": [
+		{
+			"name": "getShieldValue",
+			"inputs": [
+				{"name":"newShieldValue","type":"uint256"}
+			],
+			"outputs": [
+			]
+		},
+		{
+			"name": "takeAHit",
+			"inputs": [
+				{"name":"attackValue","type":"uint256"}
+			],
+			"outputs": [
+			]
+		},
+		{
+			"name": "destroyUnitIfBaseIsDead",
+			"inputs": [
+			],
+			"outputs": [
+			]
+		},
+		{
+			"name": "constructor",
+			"inputs": [
+			],
+			"outputs": [
+			]
+		},
+		{
+			"name": "healthValue",
+			"inputs": [
+			],
+			"outputs": [
+				{"name":"healthValue","type":"uint256"}
+			]
+		}
+	],
+	"data": [
+	],
+	"events": [
+	],
+	"fields": [
+		{"name":"_pubkey","type":"uint256"},
+		{"name":"_timestamp","type":"uint64"},
+		{"name":"_constructorFlag","type":"bool"},
+		{"name":"healthValue","type":"uint256"},
+		{"name":"shieldValue","type":"uint256"},
+		{"name":"attacker","type":"address"},
+		{"name":"attackerAddress","type":"address"}
+	]
+}
