@@ -1,0 +1,68 @@
+{
+	"ABI version": 2,
+	"version": "2.1",
+	"header": ["time", "expire"],
+	"functions": [
+		{
+			"name": "constructor",
+			"inputs": [
+			],
+			"outputs": [
+			]
+		},
+		{
+			"name": "setAttackValue",
+			"inputs": [
+				{"name":"newAttackValue","type":"uint256"}
+			],
+			"outputs": [
+			]
+		},
+		{
+			"name": "setShieldValue",
+			"inputs": [
+				{"name":"newShieldValue","type":"uint256"}
+			],
+			"outputs": [
+			]
+		},
+		{
+			"name": "attack",
+			"inputs": [
+				{"name":"addressOfTarget","type":"address"}
+			],
+			"outputs": [
+			]
+		},
+		{
+			"name": "setHealthValue",
+			"inputs": [
+				{"name":"newHealthValue","type":"uint256"}
+			],
+			"outputs": [
+			]
+		},
+		{
+			"name": "takeAHit",
+			"inputs": [
+				{"name":"attackValue","type":"uint256"}
+			],
+			"outputs": [
+			]
+		}
+	],
+	"data": [
+	],
+	"events": [
+	],
+	"fields": [
+		{"name":"_pubkey","type":"uint256"},
+		{"name":"_timestamp","type":"uint64"},
+		{"name":"_constructorFlag","type":"bool"},
+		{"name":"healthValue","type":"uint256"},
+		{"name":"shieldValue","type":"uint256"},
+		{"name":"attackerAddress","type":"address"},
+		{"name":"targetAddress","type":"address"},
+		{"name":"attackValue","type":"uint256"}
+	]
+}

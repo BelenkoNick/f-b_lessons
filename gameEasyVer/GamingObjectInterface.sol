@@ -7,6 +7,7 @@ pragma ton-solidity >= 0.35.0;
 pragma AbiHeader expire;
 
 // This is class that describes you smart contract.
-interface testinterface {
-    function addressReturn() external returns (address);
+interface GamingObjectInterface {
+   function takeAHit(uint attackValue) external;
+
 }

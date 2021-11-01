@@ -4,8 +4,9 @@
 	"header": ["time", "expire"],
 	"functions": [
 		{
-			"name": "callAddress",
+			"name": "takeAHit",
 			"inputs": [
+				{"name":"attackValue","type":"uint256"}
 			],
 			"outputs": [
 			]
@@ -25,6 +26,9 @@
 	"fields": [
 		{"name":"_pubkey","type":"uint256"},
 		{"name":"_timestamp","type":"uint64"},
-		{"name":"_constructorFlag","type":"bool"}
+		{"name":"_constructorFlag","type":"bool"},
+		{"name":"healthValue","type":"uint256"},
+		{"name":"shieldValue","type":"uint256"},
+		{"name":"attackerAddress","type":"address"}
 	]
 }
