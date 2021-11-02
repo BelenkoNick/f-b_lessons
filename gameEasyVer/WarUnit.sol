@@ -11,15 +11,13 @@ import 'GamingObject.sol';
 // This is class that describes you smart contract.
 contract WarUnit is GamingObject {
 
-    address targetAddress;
     
     uint attackValue;
 
 
     function attack(GamingObject addressOfTarget) public {
         tvm.accept();
-        // This function gets address of potential target object, and calls takeAHit it the traget object.
-        targetAddress = addressOfTarget;
+        // This function gets address of potential target object, and calls takeAHit in the target object.
         addressOfTarget.takeAHit(attackValue);
     }
 

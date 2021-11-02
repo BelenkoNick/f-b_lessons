@@ -26,7 +26,7 @@ contract WarUnit is GamingObject {
 
     function attack(GamingObject addressOfTarget) public {
         tvm.accept();
-        // This function gets address of potential target object, and calls takeAHit it the traget object.
+        // This function gets address of potential target object, and calls takeAHit in the target object.
         targetAddress = addressOfTarget;
         addressOfTarget.takeAHit(attackValue);
     }
