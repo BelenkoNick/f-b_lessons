@@ -19,7 +19,9 @@ contract GamingObject is GamingObjectInterface {
     
     function takeAHit(uint attackValue) external override {
         tvm.accept();
-        healthValue -= (attackValue - shieldValue);
+        if (attackValue > shieldValue) {
+            healthValue -= (attackValue - shieldValue);
+        } 
         attackerAddress = msg.sender;
         // After attack checkDead is called to check the health of Object.
         checkDead();

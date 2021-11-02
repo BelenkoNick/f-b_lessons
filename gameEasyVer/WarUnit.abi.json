@@ -62,7 +62,6 @@
 		{"name":"healthValue","type":"uint256"},
 		{"name":"shieldValue","type":"uint256"},
 		{"name":"attackerAddress","type":"address"},
-		{"name":"targetAddress","type":"address"},
 		{"name":"attackValue","type":"uint256"}
 	]
 }
