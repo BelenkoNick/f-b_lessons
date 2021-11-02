@@ -37,7 +37,7 @@ contract GamingObject is GamingObjectInterface {
     function checkDead() private returns (string){
         tvm.accept();
         if (healthValue < 1) {
-            // If the object has no health, call destroy fucntion.
+            // If the object has no health, call destroy function.
             destroyObject();
             return "Dead";
         } else {
