@@ -7,21 +7,6 @@ import 'ShoppingListInitDebot.sol';
 
 contract BuyingDebot is ShoppingListInitDebot {
     
-    function _menu() private{
-        string sep = '----------------------------------------';
-        Menu.select(
-            format(
-                "You have {}/{}/{} (todo/done/total) tasks",
-                    m_stat.boughtCount,
-                    m_stat.notBoughtCount,
-                    m_stat.totalSum
-            ),
-            sep,
-            [
-                MenuItem("Buy some products","",tvm.functionId(buyProduct))
-            ]
-        );
-    }
 
     function buyProduct(uint32 index) public {
         index = index;
@@ -45,10 +30,5 @@ contract BuyingDebot is ShoppingListInitDebot {
                 callbackId: tvm.functionId(onSuccess),
                 onErrorId: tvm.functionId(onError)
             }(m_productId,true, price);
-    }
-
-    function onError(uint32 sdkError, uint32 exitCode) public {
-        Terminal.print(0, format("Operation failed. sdkError {}, exitCode {}", sdkError, exitCode));
-        _menu();
     }
 }

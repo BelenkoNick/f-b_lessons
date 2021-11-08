@@ -4,10 +4,12 @@ pragma AbiHeader time;
 pragma AbiHeader pubkey;
 
 import 'ShoppingListInitDebot.sol';
+import 'BuyingDebot.sol';
+import 'BaseMethodsDebot.sol';
 
-contract AddToListDebot is ShoppingListInitDebot {
+contract AddToListDebot is ShoppingListInitDebot, BuyingDebot, BaseMethodsDebot {
     
-    function _menu() private {
+    function _menu() public override {
         string sep = '----------------------------------------';
         Menu.select(
             format(
@@ -18,7 +20,10 @@ contract AddToListDebot is ShoppingListInitDebot {
             ),
             sep,
             [
-                MenuItem("Add new product to the list","",tvm.functionId(addProduct))
+                MenuItem("Add new product to the list","",tvm.functionId(addProduct)),
+                MenuItem("Buy some products","",tvm.functionId(buyProduct)),
+                MenuItem("Show shopping list","",tvm.functionId(getShoppingList)),
+                MenuItem("Remove product from the list","",tvm.functionId(removeProduct))
             ]
         );
     }
@@ -40,10 +45,5 @@ contract AddToListDebot is ShoppingListInitDebot {
                 callbackId: tvm.functionId(onSuccess),
                 onErrorId: tvm.functionId(onError)
             }(name, count);
-    }
-
-    function onError(uint32 sdkError, uint32 exitCode) public {
-        Terminal.print(0, format("Operation failed. sdkError {}, exitCode {}", sdkError, exitCode));
-        _menu();
     }
 }

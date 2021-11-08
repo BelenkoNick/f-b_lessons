@@ -4,33 +4,10 @@ pragma AbiHeader time;
 pragma AbiHeader pubkey;
 
 import 'ShoppingListInitDebot.sol';
-import 'BuyingDebot.sol';
-import 'AddToListDebot.sol';
 
 contract BaseMethodsDebot is ShoppingListInitDebot{
     
-    function setStat(ProductsSummary stats) public override{
-        m_stat = stats;
-        _menu();
-    }
-
-    function _menu() private {
-        string sep = '----------------------------------------';
-        Menu.select(
-            format(
-                "You have {}/{}/{} (todo/done/total) tasks",
-                    m_stat.boughtCount,
-                    m_stat.notBoughtCount,
-                    m_stat.totalSum
-            ),
-            sep,
-            [
-                MenuItem("Show shopping list","",tvm.functionId(showShoppingList)),
-                MenuItem("Remove product from the list","",tvm.functionId(removeProduct))
-            ]
-        );
-    }
-    function showShoppingList(uint32 index) public view {
+    function getShoppingList(uint32 index) public view {
         index = index;
         optional(uint256) none;
         shoppingListInterface(m_address).getShoppingList{
@@ -40,12 +17,12 @@ contract BaseMethodsDebot is ShoppingListInitDebot{
             pubkey: none,
             time: uint64(now),
             expire: 0,
-            callbackId: tvm.functionId(showShoppingList_),
+            callbackId: tvm.functionId(getShoppingList_),
             onErrorId: 0
         }();
     }
 
-    function showShoppingList_( Product[] products ) public {
+    function getShoppingList_( Product[] products ) public {
         uint32 i;
         if (products.length > 0 ) {
             Terminal.print(0, "Your tasks list:");
@@ -88,10 +65,5 @@ contract BaseMethodsDebot is ShoppingListInitDebot{
                 callbackId: tvm.functionId(onSuccess),
                 onErrorId: tvm.functionId(onError)
             }(uint32(num));
-    }
-
-    function onError(uint32 sdkError, uint32 exitCode) public {
-        Terminal.print(0, format("Operation failed. sdkError {}, exitCode {}", sdkError, exitCode));
-        _menu();
     }
 }

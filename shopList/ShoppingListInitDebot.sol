@@ -35,6 +35,10 @@ abstract contract ShoppingListInitDebot is Debot, Upgradable {
         m_shoppingListStateInit = tvm.buildStateInit(m_shoppingListCode, m_shoppingListData);
     }
 
+    function onError(uint32 sdkError, uint32 exitCode) public {
+        Terminal.print(0, format("Operation failed. sdkError {}, exitCode {}", sdkError, exitCode));
+        _menu();
+    }
 
     function onSuccess() public view {
         _getStat(tvm.functionId(setStat));
@@ -75,16 +79,16 @@ abstract contract ShoppingListInitDebot is Debot, Upgradable {
             TvmCell deployState = tvm.insertPubkey(m_shoppingListStateInit, m_masterPubKey);
             m_address = address.makeAddrStd(0, tvm.hash(deployState));
             Terminal.print(0, format( "Info: your Shopping List contract address is {}", m_address));
-            Sdk.getAccountType(tvm.functionId(checkShoppingListStatus), m_address);
+            Sdk.getAccountType(tvm.functionId(checkStatus), m_address);
 
         } else {
             Terminal.input(tvm.functionId(savePublicKey),"Wrong public key. Try again!\nPlease enter your public key",false);
         }
     }
 
-    function checkShoppingListStatus(int8 acc_type) public {
+    function checkStatus(int8 acc_type) public {
         if (acc_type == 1) { // acc is active and  contract is already deployed
-            _getStat(tvm.functionId(setStat));
+            _getStat(tvm.functionId(this.setStat));
 
         } else if (acc_type == -1)  { // acc is inactive
             Terminal.print(0, "You don't have a Shopping list yet, so a new contract with an initial balance of 0.2 tokens will be deployed");
@@ -137,7 +141,6 @@ abstract contract ShoppingListInitDebot is Debot, Upgradable {
         }
     }
 
-
     function deploy() private view {
             //TvmCell image = tvm.insertPubkey(m_shoppingListCode, m_masterPubKey);
             TvmCell image = tvm.insertPubkey(m_shoppingListStateInit, m_masterPubKey);
@@ -166,6 +169,7 @@ abstract contract ShoppingListInitDebot is Debot, Upgradable {
 
     function setStat(ProductsSummary stats) virtual public {
         m_stat = stats;
+        _menu();
     }
 
 
@@ -187,5 +191,8 @@ abstract contract ShoppingListInitDebot is Debot, Upgradable {
         tvm.resetStorage();
     }
 
+    function _menu() virtual public {
+        
+    }
 
 }

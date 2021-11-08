@@ -3,7 +3,14 @@
 	"header": ["pubkey", "time", "expire"],
 	"functions": [
 		{
-			"name": "showShoppingList",
+			"name": "_menu",
+			"inputs": [
+			],
+			"outputs": [
+			]
+		},
+		{
+			"name": "addProduct",
 			"inputs": [
 				{"name":"index","type":"uint32"}
 			],
@@ -11,7 +18,24 @@
 			]
 		},
 		{
-			"name": "showShoppingList_",
+			"name": "addProduct_",
+			"inputs": [
+				{"name":"name","type":"bytes"},
+				{"name":"count","type":"uint256"}
+			],
+			"outputs": [
+			]
+		},
+		{
+			"name": "getShoppingList",
+			"inputs": [
+				{"name":"index","type":"uint32"}
+			],
+			"outputs": [
+			]
+		},
+		{
+			"name": "getShoppingList_",
 			"inputs": [
 				{"components":[{"name":"id","type":"uint32"},{"name":"name","type":"bytes"},{"name":"count","type":"uint256"},{"name":"addedAt","type":"uint32"},{"name":"isBought","type":"bool"},{"name":"priceOfPurchase","type":"uint32"}],"name":"products","type":"tuple[]"}
 			],
@@ -35,10 +59,17 @@
 			]
 		},
 		{
-			"name": "onError",
+			"name": "buyProduct",
 			"inputs": [
-				{"name":"sdkError","type":"uint32"},
-				{"name":"exitCode","type":"uint32"}
+				{"name":"index","type":"uint32"}
+			],
+			"outputs": [
+			]
+		},
+		{
+			"name": "buyProduct_",
+			"inputs": [
+				{"name":"price","type":"uint32"}
 			],
 			"outputs": [
 			]
@@ -48,6 +79,15 @@
 			"inputs": [
 				{"name":"code","type":"cell"},
 				{"name":"data","type":"cell"}
+			],
+			"outputs": [
+			]
+		},
+		{
+			"name": "onError",
+			"inputs": [
+				{"name":"sdkError","type":"uint32"},
+				{"name":"exitCode","type":"uint32"}
 			],
 			"outputs": [
 			]
@@ -133,7 +173,7 @@
 			]
 		},
 		{
-			"name": "checkIfStatusIs0",
+			"name": "checkIfContractIsReady",
 			"inputs": [
 				{"name":"acc_type","type":"int8"}
 			],
@@ -153,6 +193,14 @@
 			"name": "setStat",
 			"inputs": [
 				{"components":[{"name":"boughtCount","type":"uint32"},{"name":"notBoughtCount","type":"uint32"},{"name":"totalSum","type":"uint32"}],"name":"stats","type":"tuple"}
+			],
+			"outputs": [
+			]
+		},
+		{
+			"name": "upgrade",
+			"inputs": [
+				{"name":"state","type":"cell"}
 			],
 			"outputs": [
 			]

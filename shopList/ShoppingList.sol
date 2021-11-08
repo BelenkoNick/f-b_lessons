@@ -7,7 +7,7 @@ contract ShoppingList {
     
 
     modifier onlyOwner() {
-        //require(msg.pubkey() == m_ownerPubkey, 101);
+        require(msg.pubkey() == m_ownerPubkey, 101);
         _;
     }
 
@@ -16,19 +16,19 @@ contract ShoppingList {
 
     uint256 m_ownerPubkey;
 
-    /*constructor( uint256 pubkey) public {
+    constructor( uint256 pubkey) public {
         require(pubkey != 0, 120);
         tvm.accept();
         m_ownerPubkey = pubkey;
-    }*/
+    }
 
-    function addPurchase(string name, uint count) public onlyOwner {
+    function addProduct(string name, uint count) public onlyOwner {
         tvm.accept();
         purchasesCount++;
         m_products[purchasesCount] = Product(purchasesCount, name, count, now, false, 0);
     }
 
-    function buyPurchase(uint32 id, uint32 price) public onlyOwner {
+    function buyProduct(uint32 id, uint32 price) public onlyOwner {
         optional(Product) purchase = m_products.fetch(id);
         require(purchase.hasValue(), 102);
         tvm.accept();
@@ -38,7 +38,7 @@ contract ShoppingList {
         m_products[id] = thisPurchase;
     }
 
-    function removePurchase(uint32 id) public onlyOwner {
+    function removeProduct(uint32 id) public onlyOwner {
         require(m_products.exists(id), 102);
         tvm.accept();
         delete m_products[id];
