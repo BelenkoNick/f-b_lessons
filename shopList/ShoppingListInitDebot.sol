@@ -54,7 +54,7 @@ abstract contract ShoppingListInitDebot is Debot, Upgradable {
         address support, string hello, string language, string dabi, bytes icon
     ) {
         name = "ShoppingList DeBot";
-        version = "0.1.0";
+        version = "1.0.0";
         publisher = "BelenkoNick";
         key = "Shopping list manager";
         author = "BelenkoNick";
