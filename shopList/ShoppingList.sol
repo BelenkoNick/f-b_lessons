@@ -22,20 +22,17 @@ contract ShoppingList {
         m_ownerPubkey = pubkey;
     }
 
-    function addProduct(string name, uint count) public onlyOwner {
+    function addProduct(string name, uint32 quantity) public onlyOwner {
         tvm.accept();
         purchasesCount++;
-        m_products[purchasesCount] = Product(purchasesCount, name, count, now, false, 0);
+        m_products[purchasesCount] = Product(purchasesCount, name, quantity, now, false, 0);
     }
 
     function buyProduct(uint32 id, uint32 price) public onlyOwner {
-        optional(Product) purchase = m_products.fetch(id);
-        require(purchase.hasValue(), 102);
+        require(m_products.exists(id), 102);
         tvm.accept();
-        Product thisPurchase = purchase.get();
-        thisPurchase.isBought = true;
-        thisPurchase.priceOfPurchase = price;
-        m_products[id] = thisPurchase;
+        m_products[id].isBought = true;
+        m_products[id].priceOfPurchase = price;
     }
 
     function removeProduct(uint32 id) public onlyOwner {
@@ -50,32 +47,32 @@ contract ShoppingList {
 
     function getShoppingList() public view returns (Product[] products) {
         string name;
-        uint count;
-        uint32 addedAt;
+        uint32 quantity;
+        uint64 addedAt;
         bool isBought;
         uint32 priceOfPurchase;
 
         for((uint32 id, Product product) : m_products) {
             name = product.name;
-            count = product.count;
+            quantity = product.quantity;
             addedAt = product.addedAt;
             isBought = product.isBought;
             priceOfPurchase = product.priceOfPurchase;
-            products.push(Product(id, name, count, addedAt, isBought, priceOfPurchase));
+            products.push(Product(id, name, quantity, addedAt, isBought, priceOfPurchase));
        }
     }
 
     function getStatistics() public view returns (ProductsSummary stats) {
         uint32 PurchasedCount;
         uint32 NotPurchasedCount;
-        uint32 totalSum;
+        uint64 totalSum;
 
         for((, Product product) : m_products) {
             if  (product.isBought) {
-                PurchasedCount ++;
+                PurchasedCount++;
                 totalSum += product.priceOfPurchase;
             } else {
-                NotPurchasedCount ++;
+                NotPurchasedCount++;
             }
         }
         stats = ProductsSummary ( PurchasedCount, NotPurchasedCount, totalSum );

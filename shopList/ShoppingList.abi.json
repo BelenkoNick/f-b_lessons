@@ -14,7 +14,7 @@
 			"name": "addProduct",
 			"inputs": [
 				{"name":"name","type":"bytes"},
-				{"name":"count","type":"uint256"}
+				{"name":"quantity","type":"uint32"}
 			],
 			"outputs": [
 			]
@@ -41,7 +41,7 @@
 			"inputs": [
 			],
 			"outputs": [
-				{"components":[{"name":"id","type":"uint32"},{"name":"name","type":"bytes"},{"name":"count","type":"uint256"},{"name":"addedAt","type":"uint32"},{"name":"isBought","type":"bool"},{"name":"priceOfPurchase","type":"uint32"}],"name":"products","type":"tuple[]"}
+				{"components":[{"name":"id","type":"uint32"},{"name":"name","type":"bytes"},{"name":"quantity","type":"uint32"},{"name":"addedAt","type":"uint64"},{"name":"isBought","type":"bool"},{"name":"priceOfPurchase","type":"uint32"}],"name":"products","type":"tuple[]"}
 			]
 		},
 		{
@@ -49,7 +49,7 @@
 			"inputs": [
 			],
 			"outputs": [
-				{"components":[{"name":"boughtCount","type":"uint32"},{"name":"notBoughtCount","type":"uint32"},{"name":"totalSum","type":"uint32"}],"name":"stats","type":"tuple"}
+				{"components":[{"name":"boughtCount","type":"uint32"},{"name":"notBoughtCount","type":"uint32"},{"name":"totalSum","type":"uint64"}],"name":"stats","type":"tuple"}
 			]
 		}
 	],

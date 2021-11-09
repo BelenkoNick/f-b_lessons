@@ -6,8 +6,8 @@ pragma AbiHeader pubkey;
 struct Product {
         uint32 id;
         string name;
-        uint count;
-        uint32 addedAt;
+        uint32 quantity;
+        uint64 addedAt;
         bool isBought;
         uint32 priceOfPurchase;
     }
@@ -15,12 +15,12 @@ struct Product {
     struct ProductsSummary {
         uint32 boughtCount;
         uint32 notBoughtCount;
-        uint32 totalSum;
+        uint64 totalSum;
     }
 
 interface shoppingListInterface {
-    function addProduct(string name, uint count) external;
-    function buyProduct(uint32 id, bool isBought, uint32 price) external;
+    function addProduct(string name, uint32 quantity) external;
+    function buyProduct(uint32 id, uint32 price) external;
     function removeProduct(uint32 id) external;
     function getShoppingList() external returns (Product[] products);
     function getStatistics() external returns (ProductsSummary);

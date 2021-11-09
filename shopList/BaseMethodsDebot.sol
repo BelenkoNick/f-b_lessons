@@ -17,24 +17,24 @@ contract BaseMethodsDebot is ShoppingListInitDebot{
             pubkey: none,
             time: uint64(now),
             expire: 0,
-            callbackId: tvm.functionId(getShoppingList_),
+            callbackId: tvm.functionId(showShoppingList),
             onErrorId: 0
         }();
     }
 
-    function getShoppingList_( Product[] products ) public {
+    function showShoppingList( Product[] products ) public {
         uint32 i;
         if (products.length > 0 ) {
-            Terminal.print(0, "Your tasks list:");
+            Terminal.print(0, "Your products list:");
             for (i = 0; i < products.length; i++) {
                 Product product = products[i];
                 string bought;
                 if (product.isBought) {
-                    bought = '✓';
+                    bought = 'Yes';
                 } else {
-                    bought = ' ';
+                    bought = 'No';
                 }
-                Terminal.print(0, format("{} \"{}\" {} pieces {} for {} added at {}", product.id, product.name, bought, product.priceOfPurchase, product.count, product.addedAt));
+                Terminal.print(0, format("{}. Product: {}, {} pieces. Bought: {}, for the price of {}. Product Added at {}.", product.id, product.name, product.quantity, bought, product.priceOfPurchase, product.addedAt));
             }
         } else {
             Terminal.print(0, "Your shopping list is empty");
@@ -42,17 +42,17 @@ contract BaseMethodsDebot is ShoppingListInitDebot{
         _menu();
     }
 
-    function removeProduct(uint32 index) public {
+    function askRemoveNumber(uint32 index) public {
         index = index;
         if (m_stat.boughtCount + m_stat.notBoughtCount > 0) {
-            Terminal.input(tvm.functionId(removeProduct_), "Enter product number:", false);
+            Terminal.input(tvm.functionId(removeProduct), "Enter product number:", false);
         } else {
             Terminal.print(0, "Sorry, you have no products to remove");
             _menu();
         }
     }
 
-    function removeProduct_(string value) public view {
+    function removeProduct(string value) public view {
         (uint256 num,) = stoi(value);
         optional(uint256) pubkey = 0;
         shoppingListInterface(m_address).removeProduct{

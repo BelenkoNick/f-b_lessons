@@ -10,7 +10,7 @@
 			]
 		},
 		{
-			"name": "askName",
+			"name": "askNumber",
 			"inputs": [
 				{"name":"index","type":"uint32"}
 			],
@@ -18,7 +18,7 @@
 			]
 		},
 		{
-			"name": "askQuantity",
+			"name": "askPrice",
 			"inputs": [
 				{"name":"value","type":"bytes"}
 			],
@@ -26,7 +26,7 @@
 			]
 		},
 		{
-			"name": "addProduct",
+			"name": "buyProduct",
 			"inputs": [
 				{"name":"value","type":"bytes"}
 			],

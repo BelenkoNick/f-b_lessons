@@ -10,6 +10,30 @@
 			]
 		},
 		{
+			"name": "askNumber",
+			"inputs": [
+				{"name":"index","type":"uint32"}
+			],
+			"outputs": [
+			]
+		},
+		{
+			"name": "askPrice",
+			"inputs": [
+				{"name":"value","type":"bytes"}
+			],
+			"outputs": [
+			]
+		},
+		{
+			"name": "buyProduct",
+			"inputs": [
+				{"name":"value","type":"bytes"}
+			],
+			"outputs": [
+			]
+		},
+		{
 			"name": "askName",
 			"inputs": [
 				{"name":"index","type":"uint32"}
