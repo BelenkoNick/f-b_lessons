@@ -3,6 +3,7 @@ pragma AbiHeader expire;
 pragma AbiHeader time;
 pragma AbiHeader pubkey;
 
+// Struct that represents the product in the shopping list
 struct Product {
         uint32 id;
         string name;
@@ -11,13 +12,13 @@ struct Product {
         bool isBought;
         uint32 priceOfPurchase;
     }
-
+// Struct that represents the shopping list stats
     struct ProductsSummary {
         uint32 boughtCount;
         uint32 notBoughtCount;
         uint64 totalSum;
     }
-
+// Main Interface
 interface shoppingListInterface {
     function addProduct(string name, uint32 quantity) external;
     function buyProduct(uint32 id, uint32 price) external;
@@ -26,6 +27,7 @@ interface shoppingListInterface {
     function getStatistics() external returns (ProductsSummary);
 }
 
+// This interface is used to deploy shopping list
 interface Transactable {
     function sendTransaction (address dest, uint128 value, bool bounce, uint8 flags, TvmCell payload) external;
 }

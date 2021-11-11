@@ -7,6 +7,9 @@ import 'ShoppingListInitDebot.sol';
 
 contract BaseMethodsDebot is ShoppingListInitDebot{
     
+    // This debot is dedicated to storing base functions of shopping list such as removing products and showing stats
+
+    // This function gets info about products based on index
     function getShoppingList(uint32 index) public view {
         index = index;
         optional(uint256) none;
@@ -22,6 +25,7 @@ contract BaseMethodsDebot is ShoppingListInitDebot{
         }();
     }
 
+    // This function is called after getShoppingList and show all the info
     function showShoppingList( Product[] products ) public {
         uint32 i;
         if (products.length > 0 ) {
@@ -42,6 +46,7 @@ contract BaseMethodsDebot is ShoppingListInitDebot{
         _menu();
     }
 
+    // This function ask which product caller wants to remove
     function askRemoveNumber(uint32 index) public {
         index = index;
         if (m_stat.boughtCount + m_stat.notBoughtCount > 0) {
@@ -52,6 +57,7 @@ contract BaseMethodsDebot is ShoppingListInitDebot{
         }
     }
 
+    // This function is called after askRemoveNumber and it deletes product based on index
     function removeProduct(string value) public view {
         (uint256 num,) = stoi(value);
         optional(uint256) pubkey = 0;

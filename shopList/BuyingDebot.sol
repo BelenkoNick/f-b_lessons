@@ -8,12 +8,17 @@ import 'BaseMethodsDebot.sol';
 
 contract BuyingDebot is ShoppingListInitDebot, BaseMethodsDebot {
     
+    // This debot is dedicated to buying products on the list
+
+    // Params needed for buying function
     uint32 productPrice;
 
+    // New overrided menu that contains 3 options
     function _menu() public override {
         string sep = '----------------------------------------';
         Menu.select(
             format(
+                // Prints shopping list stats
                 "You have {} products added to the list, {} added and already bought, and {} is a total sum of bought products)",
                     m_stat.notBoughtCount,
                     m_stat.boughtCount,
@@ -22,12 +27,14 @@ contract BuyingDebot is ShoppingListInitDebot, BaseMethodsDebot {
             sep,
             [
                 MenuItem("Buy product on the list","",tvm.functionId(askNumber)),
+                // Those functions is imported from BaseMethodsDebot
                 MenuItem("Show shopping list","",tvm.functionId(getShoppingList)),
                 MenuItem("Remove product from the list","",tvm.functionId(askRemoveNumber))
             ]
         );
     }
 
+    // The first buying function that asks index of a product
     function askNumber(uint32 index) public {
         index = index;
         if (m_stat.notBoughtCount > 0) {
@@ -38,12 +45,14 @@ contract BuyingDebot is ShoppingListInitDebot, BaseMethodsDebot {
         }
     }
 
+    // The second buying function that asks price of a product
     function askPrice(string value) public {
         (uint256 num,) = stoi(value);
         m_productId = uint32(num);
         Terminal.input(tvm.functionId(buyProduct),"Enter price:", false);
     }
 
+    // The third buying function that chages product status to "Bought" and sets price as caller inputs
     function buyProduct(string value) public {
         (uint256 price,) = stoi(value);
         productPrice = uint32(price);
